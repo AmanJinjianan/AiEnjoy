@@ -1,4 +1,4 @@
-package com.aman.aienjoy.ui.login;
+package com.aman.aienjoy.ui.main;
 
 import android.app.Activity;
 
@@ -23,8 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aman.aienjoy.R;
-import com.aman.aienjoy.ui.login.LoginViewModel;
-import com.aman.aienjoy.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 

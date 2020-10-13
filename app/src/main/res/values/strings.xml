@@ -9,4 +9,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="movie">电视</string>
+    <string name="tv">电影</string>
+    <string name="game">动漫</string>
 </resources>

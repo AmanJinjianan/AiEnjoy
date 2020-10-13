@@ -1,4 +1,4 @@
-package com.aman.aienjoy.ui.login;
+package com.aman.aienjoy.ui.main;
 
 /**
  * Class exposing authenticated user details to the UI.

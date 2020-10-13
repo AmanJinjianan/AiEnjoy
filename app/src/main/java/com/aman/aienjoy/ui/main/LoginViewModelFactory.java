@@ -1,4 +1,4 @@
-package com.aman.aienjoy.ui.login;
+package com.aman.aienjoy.ui.main;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
