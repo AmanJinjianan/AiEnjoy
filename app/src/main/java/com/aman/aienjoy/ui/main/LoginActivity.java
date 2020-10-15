@@ -1,129 +1,154 @@
 package com.aman.aienjoy.ui.main;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
+import android.os.Handler;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.aman.aienjoy.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity implements View.OnClickListener {
 
-    private LoginViewModel loginViewModel;
+    private TextView mBtnLogin;
+
+    private View progress;
+
+    private View mInputLayout;
+
+    private float mWidth, mHeight;
+
+    private LinearLayout mName, mPsw;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
-            }
-        });
-
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
-
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        });
+        initView();
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+    private void initView() {
+        mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
+        progress = findViewById(R.id.layout_progress);
+        mInputLayout = findViewById(R.id.input_layout);
+        mName = (LinearLayout) findViewById(R.id.input_layout_name);
+        mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
+
+        mBtnLogin.setOnClickListener(this);
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    @Override
+    public void onClick(View v) {
+
+        // 计算出控件的高与宽
+        mWidth = mBtnLogin.getMeasuredWidth();
+        mHeight = mBtnLogin.getMeasuredHeight();
+        // 隐藏输入框
+        mName.setVisibility(View.INVISIBLE);
+        mPsw.setVisibility(View.INVISIBLE);
+
+        inputAnimator(mInputLayout, mWidth, mHeight);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+            }
+        },1500);
+    }
+
+    /**
+     * 输入框的动画效果
+     *
+     * @param view
+     *            控件
+     * @param w
+     *            宽
+     * @param h
+     *            高
+     */
+    private void inputAnimator(final View view, float w, float h) {
+
+        AnimatorSet set = new AnimatorSet();
+
+        ValueAnimator animator = ValueAnimator.ofFloat(0, w);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (Float) animation.getAnimatedValue();
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view
+                        .getLayoutParams();
+                params.leftMargin = (int) value;
+                params.rightMargin = (int) value;
+                view.setLayoutParams(params);
+            }
+        });
+
+        ObjectAnimator animator2 = ObjectAnimator.ofFloat(mInputLayout,
+                "scaleX", 1f, 0.5f);
+        set.setDuration(1000);
+        set.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.playTogether(animator, animator2);
+        set.start();
+        set.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                /**
+                 * 动画结束后，先显示加载的动画，然后再隐藏输入框
+                 */
+                progress.setVisibility(View.VISIBLE);
+                progressAnimator(progress);
+                mInputLayout.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+        });
+
+    }
+
+    /**
+     * 出现进度动画
+     *
+     * @param view
+     */
+    private void progressAnimator(final View view) {
+        PropertyValuesHolder animator = PropertyValuesHolder.ofFloat("scaleX",
+                0.5f, 1f);
+        PropertyValuesHolder animator2 = PropertyValuesHolder.ofFloat("scaleY",
+                0.5f, 1f);
+        ObjectAnimator animator3 = ObjectAnimator.ofPropertyValuesHolder(view,
+                animator, animator2);
+        animator3.setDuration(1000);
+        animator3.setInterpolator(new JellyInterpolator());
+        animator3.start();
+
     }
 }
