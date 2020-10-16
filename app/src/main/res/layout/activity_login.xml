@@ -47,12 +47,12 @@
             android:id="@+id/input_layout"
             layout="@layout/input_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="160dip" />
 
         <include
             android:id="@+id/layout_progress"
             android:layout_width="match_parent"
-            android:layout_height="130dip"
+            android:layout_height="160dip"
             layout="@layout/layout_progress"
             android:visibility="gone" />
 

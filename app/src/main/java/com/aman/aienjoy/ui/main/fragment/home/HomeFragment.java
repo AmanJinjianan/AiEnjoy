@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aman.aienjoy.R;
+import com.aman.aienjoy.ui.main.adapter.MovieListAdapter;
 import com.aman.aienjoy.ui.main.base.BaseFragment;
 import com.aman.aienjoy.ui.main.utils.LogUtil;
 import com.aman.aienjoy.ui.main.utils.ToastUtil;
@@ -43,6 +45,8 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePresenter
     private List titles = new ArrayList<>();
     private List img_tolink = new ArrayList<>();
 
+    private RecyclerView rc_lesson;
+    private MovieListAdapter lessonAdapter;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -67,6 +71,12 @@ public class HomeFragment extends BaseFragment<HomeContract.IView, HomePresenter
     @Override
     protected void initView(View view) {
         banner = view.findViewById(R.id.banner1);
+        rc_lesson = view.findViewById(R.id.rc_movies);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        lessonAdapter = new MovieListAdapter(lessons,getContext());
+
+        rc_lesson.setLayoutManager(layoutManager);
+        rc_lesson.setAdapter(lessonAdapter);
     }
 
     @Override

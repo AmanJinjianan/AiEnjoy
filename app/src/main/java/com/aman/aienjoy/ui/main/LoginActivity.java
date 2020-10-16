@@ -51,7 +51,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
         // 计算出控件的高与宽
         mWidth = mBtnLogin.getMeasuredWidth();
         mHeight = mBtnLogin.getMeasuredHeight();
@@ -65,6 +64,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             @Override
             public void run() {
                 startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                finish();
             }
         },1500);
     }
