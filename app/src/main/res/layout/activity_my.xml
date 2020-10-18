@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.main.MyActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@color/bg_blue">
+
+        <ImageView
+            android:id="@+id/tv_nickname"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/logo"
+            android:text="nikename" />
+
+        <TextView
+            android:id="@+id/txt_user_name"
+            android:layout_width="85dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_nickname"
+            android:layout_alignStart="@+id/tv_nickname"
+            android:layout_marginStart="129dp"
+            android:layout_marginTop="-91dp"
+            android:text="18337133023"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_user_phone2"
+            android:layout_width="35dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_nickname"
+            android:layout_alignStart="@+id/tv_nickname"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="-56dp"
+            android:text="等级"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_user_phone4"
+            android:layout_width="35dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_nickname"
+            android:layout_alignStart="@+id/tv_nickname"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="-56dp"
+            android:text="积分"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/txt_user_grade"
+            android:layout_width="45dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_nickname"
+            android:layout_alignStart="@+id/tv_nickname"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="-33dp"
+            android:text="五星上将"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_user_major"
+            android:layout_width="105dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_nickname"
+            android:layout_alignStart="@+id/tv_nickname"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="-33dp"
+            android:text="99分"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingHorizontal="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:textColor="@color/bg_blue"
+            android:text="@string/my_honor"/>
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:textColor="@color/bg_blue"
+            android:text="@string/more"/>
+    </FrameLayout>
+
+    <com.aman.aienjoy.widget.EchartView
+        android:id="@+id/lineChart"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center">
+    </com.aman.aienjoy.widget.EchartView>
+</LinearLayout>

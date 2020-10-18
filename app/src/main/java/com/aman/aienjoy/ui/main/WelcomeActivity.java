@@ -12,11 +12,13 @@ import android.os.SystemClock;
 import android.view.Window;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.aman.aienjoy.R;
 
 import java.util.Random;
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends AppCompatActivity {
 
     ImageView mIVEntry;
 

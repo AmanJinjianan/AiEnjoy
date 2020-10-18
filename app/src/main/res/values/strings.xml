@@ -13,4 +13,14 @@
     <string name="movie">电视</string>
     <string name="tv">电影</string>
     <string name="game">动漫</string>
+
+    <string name="center">个人中心</string>
+    <string name="register">注册</string>
+
+    <string name="my_honor">我邀请的人数</string>
+    <string name="more">更多>></string>
+
+    <string name="phone_please">请输入注册手机号</string>
+    <string name="psd_please">请输入密码</string>
+    <string name="psd_please_again">请再次输入密码</string>
 </resources>

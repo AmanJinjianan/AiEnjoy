@@ -13,7 +13,6 @@
         android:padding="10dip" >
 
         <LinearLayout
-            android:id="@+id/input_layout_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -26,12 +25,12 @@
                 android:src="@drawable/user" />
 
             <EditText
-                android:id="@+id/et_name_login"
+                android:id="@+id/et_register_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
-                android:hint="账号/用户名/邮箱"
+                android:hint="@string/phone_please"
                 android:padding="5dip"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -44,7 +43,7 @@
             android:background="#eeeeee" />
 
         <LinearLayout
-            android:id="@+id/input_layout_psw"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -57,12 +56,41 @@
                 android:src="@drawable/psd" />
 
             <EditText
-                android:id="@+id/et_psd_login"
+                android:id="@+id/et_register_psd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
-                android:hint="密码"
+                android:hint="@string/psd_please"
+                android:inputType="textPassword"
+                android:padding="5dip"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#eeeeee" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="7dp"
+                android:src="@drawable/psd" />
+
+            <EditText
+                android:id="@+id/et_register_psd2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:background="#00000000"
+                android:hint="@string/psd_please_again"
                 android:inputType="textPassword"
                 android:padding="5dip"
                 android:textSize="16sp" />

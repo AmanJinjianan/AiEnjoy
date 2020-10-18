@@ -35,7 +35,7 @@ import okhttp3.Response;
 public class OkHttpUtils {
 
     //基本url
-    public static String BASE_URL = "http://192.168.1.205:8080/zzedu/api";
+    public static String BASE_URL = "http://39.106.100.53/api";
     //public static String BASE_URL = "http://192.168.1.205:8903";
 
     private OkHttpClient client;

@@ -6,14 +6,14 @@
     android:padding="10dip" >
 
 
-
     <TextView
+        android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:textSize="20sp"
-        android:text="Sign up"
+        android:text="@string/register"
         />
 </RelativeLayout>
